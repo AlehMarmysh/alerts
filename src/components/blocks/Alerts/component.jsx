@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { AlertsContainer } from './styles';
 
-const CustomAlert = ({ label, color, isCloseHandle, setIsAlertWindow }) => {
+const CustomAlert = ({ label, color, isCloseHandle, setIsAlertWindow, isGlobalAlert }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -20,15 +20,14 @@ const CustomAlert = ({ label, color, isCloseHandle, setIsAlertWindow }) => {
 
   return (
     <>
-      {isCloseHandle ? (
-        <AlertsContainer color={color} isOpen={isVisible} toggle={onDismiss}>
-          {label}
-        </AlertsContainer>
-      ) : (
-        <AlertsContainer color={color} isOpen={isVisible}>
-          {label}
-        </AlertsContainer>
-      )}
+      <AlertsContainer
+        color={color}
+        isOpen={isVisible}
+        toggle={isCloseHandle && onDismiss}
+        isGlobalAlert={isGlobalAlert}
+      >
+        {label}
+      </AlertsContainer>
     </>
   );
 };

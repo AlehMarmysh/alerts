@@ -4,27 +4,26 @@ import { AppContainer, CustomGlobalAlert } from './styles';
 import LoginForm from '../forms/LoginForm';
 import CustomAlert from '../blocks/Alerts';
 import { useDispatch, useSelector } from 'react-redux';
-import {getIsVisibleGlobalAlert, setIsVisibleGlobalAlert} from '../../store/globalAlert';
+import { getIsVisibleGlobalAlert, setIsVisibleGlobalAlert } from '../../store/globalAlert';
 
 const App = () => {
   const isVisibleGlobalAlert = useSelector(getIsVisibleGlobalAlert);
   const dispatch = useDispatch();
 
-  const hideGlobalAlert = useCallback((isOpen) => {
-      dispatch(setIsVisibleGlobalAlert(isOpen))
+  const hideGlobalAlert = useCallback(isOpen => {
+    dispatch(setIsVisibleGlobalAlert(isOpen));
   }, []);
 
   return (
     <AppContainer>
       {isVisibleGlobalAlert && (
-        <CustomGlobalAlert>
-          <CustomAlert
-            isCloseHandle
-            color="danger"
-            label="i am local warning alert witch closes automatically"
-            setIsAlertWindow = {hideGlobalAlert}
-          />
-        </CustomGlobalAlert>
+        <CustomAlert
+          isGlobalAlert
+          isCloseHandle
+          color="danger"
+          label="i am local warning alert witch closes automatically"
+          setIsAlertWindow={hideGlobalAlert}
+        />
       )}
       <SearchForm />
       <LoginForm />
